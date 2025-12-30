@@ -16,7 +16,7 @@ class EthAuthenticationService
   # 11155111 = Sepolia Testnet
   # 137 = Polygon Mainnet
   # 80001 = Polygon Mumbai Testnet
-  ALLOWED_CHAIN_IDS = [1, 5, 11155111, 137, 80001].freeze
+  ALLOWED_CHAIN_IDS = [ 1, 5, 11155111, 137, 80001 ].freeze
 
   def initialize(eth_address:, message:, signature:, request:)
     @eth_address = eth_address.downcase

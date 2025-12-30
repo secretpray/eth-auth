@@ -1,0 +1,40 @@
+<div class="space-y-8">
+  <% if Current.user %>
+    <div class="card shadow-lg">
+      <div class="card-header border-b border-border">
+        <h2 class="text-xl font-semibold tracking-tight">Dashboard</h2>
+      </div>
+      <div class="card-content space-y-4">
+         <div class="p-4 rounded-lg bg-muted/50 border border-border">
+            <div class="text-sm font-medium text-muted-foreground mb-1">Ethereum Address</div>
+            <div class="font-mono text-sm break-all"><%= Current.user.eth_address %></div>
+         </div>
+      </div>
+    </div>
+  <% else %>
+     <div class="flex flex-col items-center justify-center min-h-[50vh] text-center space-y-6">
+        <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl bg-linear-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+          Blockchain Rails
+        </h1>
+        <p class="max-w-[600px] text-muted-foreground text-lg sm:text-xl">
+           A secure, decentralized authentication system built with Ruby on Rails and Ethereum.
+        </p>
+
+        <%# Hidden wallet login form %>
+        <div class="hidden">
+          <%= form_with url: session_path, method: :post, id: "wallet-login-form" do %>
+            <%= hidden_field_tag :eth_address, nil, data: { "wallet-login-target": "address" } %>
+            <%= hidden_field_tag :message, nil, data: { "wallet-login-target": "message" } %>
+            <%= hidden_field_tag :signature, nil, data: { "wallet-login-target": "signature" } %>
+          <% end %>
+        </div>
+
+        <div class="flex gap-4">
+           <button type="button" class="btn h-11 px-8 text-base cursor-pointer" data-action="click->wallet-login#connectAndSign">
+             <span class="mr-2">⚡</span> Sign In
+           </button>
+           <%= link_to "Learn More", "#", class: "btn btn-ghost h-11 px-8 text-base" %>
+        </div>
+     </div>
+  <% end %>
+</div>
